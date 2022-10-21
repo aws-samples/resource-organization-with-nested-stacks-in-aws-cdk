@@ -44,7 +44,7 @@ In this walkthrough we will be creating a Nested Stack in AWS CloudFormation by 
     - IAM
     - VPC
     - Step Functions
-You can get full list of required permissions per AWS service in this file *<TODO - LINK*>
+You can get full list of required permissions per AWS service in this file - [permissions.txt](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/permissions.txt)
 * Basic knowledge of one of the programming languages, which are supported by AWS CDK: JavaScript, TypeScript, Python, Java, C# and Go. In this walkthrough will be shown example, written in Python.
 
 ## Walkthrough
@@ -81,15 +81,15 @@ Also, it is recommended to download the whole repo from our [GitHub repository](
 
 The Networking team is responsible for defining the network configuration, which can be used by other teams in the company. In our case, here, we will be deploying VPC, Subnets, NAT Gateway, Internet Gateway and other network components, required for building compute services on the top of this network.
 
-The code for the VPC stack should be placed in path `networking/vpc_stack.py`. You can find the source of the code in GitHub page under the same path. Link *<TBD>*
+The code for the VPC stack should be placed in path `networking/vpc_stack.py`. Additionally put the `networking/__init__.py` to the same folder so CDK will recognize `vpc_stack.py` as Constructor. You can find the source of the code in GitHub page under the same path here: [vpc_stack.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/networking/vpc_stack.py) and [__init.py__](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/networking/__init__.py)
 
 
 ## Defining nested stack for Security team
 
 In our case, Security team is responsible for granting access to other teams, by managing IAM users and roles. This is a usual case for many Security teams and CSO office in organization.
 
-The code for the IAM stack should be placed in path `security/iam_stack.py`. 
-The source code can also be found in the GitHub under this link: <*TBD*>
+The code for the IAM stack should be placed in path `security/iam_stack.py`. Additionally put the `security/__init__.py` to the same folder.
+The source code can also be found in the GitHub under these links: [iam_stack.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/security/iam_stack.py) and [__init.py__](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/security/__init__.py)
 
 ## Defining nested stack for Development team 
 
@@ -98,21 +98,22 @@ Most of the companies, which are working in IT and Software sector, are having m
 1. Reusable compute components for Analytics team, which is consists of 4 Lambda functions (Nested Stack)
 2. Standalone Backend environment which is being used by the Dev team itself (Standalone Stack)
 
-There will be 2 files with a code for ComputeStack and BackEndStack. Code should be placed in `development/compute_stack.py` and `development/backend_stack.py` respectively. 
+There will be 2 files with a code for ComputeStack and BackEndStack. Code should be placed in `development/compute_stack.py` and `development/backend_stack.py` respectively. Additionally put the `development/__init__.py` to the same folder.
 
-Link to compute_stack.py <*TBD>*
-Link to backend_stack.py <*TBD>*
+Link to [compute_stack.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/development/compute_stack.py)
+Link to [backend_stack.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/development/backend_stack.py)
+Link to [__init.py__](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/development/__init__.py)
 
 ## Defining root stack for Analytics team
 
 We are using Analytics team in this example to define the high-level logic of processing customer orders. The compute coding was done previously by Dev team and defined by it in ComputeStack (4 Lambda functions). The task for Analytics team here is to define the processing algorithm in AWS Step Functions by using ETLStack.
 
-The code for the ETL stack should be placed in path analytics/etl_stack.py
-The GitHub location of the etl_stack.py - *<TBD>*
+The code for the ETL stack should be placed in path `analytics/etl_stack.py`. Additionally put the `analytics/__init__.py` to the same folder.
+Here you can find GitHub location of the [etl_stack.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/analytics/etl_stack.py) and [__init.py__](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/application/development/__init__.py)
 
 ## Including all stacks into a single file 
 
-And finally, we need to put all these stacks together by mentioning them in app.py file. This file is already created during the `cdk init` command execution, so you need to replace its content with the one from GitHub repo (*Link <TBD>*):
+And finally, we need to put all these stacks together by mentioning them in app.py file. This file is already created during the `cdk init` command execution, so you need to replace its content with the one from GitHub repo - [app.py](https://github.com/aws-samples/resource-organization-with-nested-stacks-in-aws-cdk/blob/main/cdk-nested-poc/app.py)
 
 ## Deploying to AWS
 
